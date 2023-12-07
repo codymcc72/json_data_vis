@@ -1,0 +1,29 @@
+header: 
+  seq: 12169
+  stamp: 
+    secs: 1701904035
+    nsecs: 591335773
+  frame_id: ''
+status: 
+  status: 4
+  service: 0
+latitude: 35.004995845
+longitude: 120.4820155483
+altitude: 52.375
+position_covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+position_covariance_type: 0
+---
+header: 
+  seq: 12170
+  stamp: 
+    secs: 1701904035
+    nsecs: 691106796
+  frame_id: ''
+status: 
+  status: 4
+  service: 0
+latitude: 35.0049956933
+longitude: 120.4820151533
+altitude: 52.38
+position_covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+position_covariance_type: 0
