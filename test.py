@@ -225,68 +225,33 @@ class IdealTime:
         return self.ideal_travel_times
 
 
-class GPSRecorder:
-    def __init__(self, json_data):
-        self.json_data = json_data
+class SimpleGPSRecorder:
+    def __init__(self):
         self.recorded_data = []
 
         # Set up ROS subscriber for GPS data
         rospy.Subscriber('gps_head_data', NavSatFix, self.gps_callback)
 
-    def calculate_distance(self, point1, point2):
-        x1, y1 = point1['x'], point1['y']
-        x2, y2 = point2['x'], point2['y']
-        distance = math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
-        return distance
-
-    def determine_section(self, gps_data):
-        # Reuse the logic from JsonDataMap to determine the section
-        x_gps = gps_data.longitude  # Assuming longitude corresponds to X coordinate
-        y_gps = gps_data.latitude   # Assuming latitude corresponds to Y coordinate
-
-        # Check if the GPS point is within the rows
-        for row_point in self.json_data['points']:
-            x_row = row_point['head']['position']['x'] + self.json_data['datum']['longitude']
-            y_row = row_point['head']['position']['y'] + self.json_data['datum']['latitude']
-
-            distance = self.calculate_distance({'x': x_gps, 'y': y_gps}, {'x': x_row, 'y': y_row})
-
-            # Set a threshold for considering a point within the rows
-            if distance < 0.1:  # Adjust this threshold based on your needs
-                return 'rows'
-
-        # Add similar checks for other sections (start path, turns, end path) based on your map data
-
-        # For simplicity, let's assume that the robot is always in the "rows" section
-        return 'rows'
-
-    def record_data(self, point_number, section, timestamp):
-        self.recorded_data.append({'point_number': point_number, 'section': section, 'timestamp': timestamp})
-
     def gps_callback(self, gps_data):
         x_gps = gps_data.longitude  # Assuming longitude corresponds to X coordinate
         y_gps = gps_data.latitude   # Assuming latitude corresponds to Y coordinate
 
-        # Iterate through map points to find the closest one
-        for point_number, map_point in enumerate(self.json_data['points']):
-            x_map = map_point['head']['position']['x'] + self.json_data['datum']['longitude']
-            y_map = map_point['head']['position']['y'] + self.json_data['datum']['latitude']
+        # Print GPS head information
+        print("GPS Data - Longitude: {:.6f}, Latitude: {:.6f}".format(x_gps, y_gps))
 
-            distance = self.calculate_distance({'x': x_gps, 'y': y_gps}, {'x': x_map, 'y': y_map})
+    def start_recording(self):
+        # Spin ROS node to receive callbacks
+        rospy.spin()
 
-            # Set a threshold for considering a point as passed
-            if distance < 0.1:  # Adjust this threshold based on your needs
-                section = self.determine_section(gps_data)
-                timestamp = rospy.get_time()
-                self.record_data(point_number, section, timestamp)
+if __name__ == "__main__":
+    # Initialize ROS node
+    rospy.init_node('simple_gps_recorder', anonymous=True)
 
-    def determine_section(self, gps_data):
-        # Implement logic to determine the section (start path, rows, turns, end path)
-        # For simplicity, let's assume that the robot is always in the "rows" section
-        return 'rows'
+    # Initialize SimpleGPSRecorder
+    gps_recorder = SimpleGPSRecorder()
 
-    def record_data(self, point_number, section, timestamp):
-        self.recorded_data.append({'point_number': point_number, 'section': section, 'timestamp': timestamp})
+    # Start recording (spin ROS node)
+    gps_recorder.start_recording()
 
 # Load JSON data from file
 def load_json_data(file_name):
