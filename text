@@ -1,29 +1,8 @@
-header: 
-  seq: 12169
-  stamp: 
-    secs: 1701904035
-    nsecs: 591335773
-  frame_id: ''
-status: 
-  status: 4
-  service: 0
-latitude: 35.004995845
-longitude: 120.4820155483
-altitude: 52.375
-position_covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-position_covariance_type: 0
----
-header: 
-  seq: 12170
-  stamp: 
-    secs: 1701904035
-    nsecs: 691106796
-  frame_id: ''
-status: 
-  status: 4
-  service: 0
-latitude: 35.0049956933
-longitude: 120.4820151533
-altitude: 52.38
-position_covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-position_covariance_type: 0
+Traceback (most recent call last):
+  File "/home/tric/ros_data_vis/json_map_plot/test.py", line 336, in <module>
+    main()
+  File "/home/tric/ros_data_vis/json_map_plot/test.py", line 331, in main
+    gps_recorder = SimpleGPSRecorder(json_data)
+TypeError: __init__() takes 1 positional argument but 2 were given
+
+[Done] exited with code=null in 49.65 seconds
