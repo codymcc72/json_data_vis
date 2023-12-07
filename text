@@ -1,8 +1,1 @@
-Traceback (most recent call last):
-  File "/home/tric/ros_data_vis/json_map_plot/test.py", line 336, in <module>
-    main()
-  File "/home/tric/ros_data_vis/json_map_plot/test.py", line 331, in main
-    gps_recorder = SimpleGPSRecorder(json_data)
-TypeError: __init__() takes 1 positional argument but 2 were given
-
-[Done] exited with code=null in 49.65 seconds
+https://prod.liveshare.vsengsaas.visualstudio.com/join?B8E57B7A03DE3D3E0D9CD6CB9A200661866C
