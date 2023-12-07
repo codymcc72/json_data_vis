@@ -2,7 +2,7 @@ import json
 import math
 import matplotlib.pyplot as plt
 import rospy
-from std_msgs.msg import NatSatFix
+from sensor_msgs.msg import NavSatFix
 
 # Class to represent map data from JSON
 class JsonDataMap:
@@ -231,7 +231,7 @@ class GPSRecorder:
         self.recorded_data = []
 
         # Set up ROS subscriber for GPS data
-        rospy.Subscriber('gps_head_data', YourGPSMessageType, self.gps_callback)
+        rospy.Subscriber('gps_head_data', NavSatFix, self.gps_callback)
 
     def calculate_distance(self, point1, point2):
         x1, y1 = point1['x'], point1['y']
